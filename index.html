@@ -56,7 +56,7 @@
     </div>
 
     <!-- Hidden Unlock Button -->
-    <a id="unlockButton" href="https://your-custom-link.com" target="_blank">Go to the Link</a>
+    <a id="unlockButton" href="#" target="_blank">Get Password</a>
 
     <!-- Message -->
     <div id="message"></div>
@@ -76,14 +76,22 @@
     const message = document.getElementById('message');
     const iframe = document.getElementById('youtubeVideo');
 
-    // Parse YouTube Video ID from URL Query Parameter
+    // Parse URL Parameters
     const urlParams = new URLSearchParams(window.location.search);
     const videoId = urlParams.get('video');
+    const unlockLink = urlParams.get('text');
 
+    // Set YouTube video and unlock link
     if (videoId) {
       iframe.src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1`;
     } else {
       message.innerText = "Error: No video ID provided in the URL.";
+    }
+
+    if (unlockLink) {
+      unlockButton.href = `https://controlc.com/${unlockLink}`;
+    } else {
+      message.innerText = "Error: No unlock link provided in the URL.";
     }
 
     // Initialize YouTube Player
